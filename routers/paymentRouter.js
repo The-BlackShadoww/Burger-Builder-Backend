@@ -3,6 +3,7 @@ const SSLCommerz = require("ssl-commerz-node");
 const PaymentSession = SSLCommerz.PaymentSession;
 const { Payment } = require("../models/payment");
 const { Profile } = require("../models/profile");
+const { Orders } = require("../models/order");
 const path = require("path");
 const FormData = require("form-data");
 const fetch = require("node-fetch");
@@ -22,6 +23,8 @@ const initPayment = async (req, res) => {
         const profile = await Profile.findOne({ user: userId });
         const { address1, address2, city, state, postcode, country, phone } =
             profile;
+        const orderedProduct = await Orders.find({ user: userId });
+        console.log(orderedProduct);
 
         const total_amount = 0;
 
