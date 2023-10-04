@@ -21,6 +21,7 @@ const initPayment = async (req, res) => {
     try {
         const userId = req.user._id;
         const price = req.query.price;
+        console.log("this is the price => ", price);
         const profile = await Profile.findOne({ user: userId });
         const { address1, address2, city, state, postcode, country, phone } =
             profile;
