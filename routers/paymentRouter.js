@@ -7,11 +7,14 @@ const path = require("path");
 const FormData = require("form-data");
 const fetch = require("node-fetch");
 const authorize = require("../middleware/authorize");
-// const {
-//     initPayment,
-//     ipn,
-//     paymentSuccess,
-// } = require("../controllers/paymentController");
+
+const ipn = async (req, res) => {
+    const payment = new Payment(req.body);
+
+    await payment.save();
+
+    return res.status(200).send("IPN");
+};
 
 const initPayment = async (req, res) => {
     try {
@@ -29,7 +32,6 @@ const initPayment = async (req, res) => {
             Math.random().toString(36).substr(2, 9) +
             new Date().getTime();
 
-       
         const payment = new PaymentSession(
             true,
             process.env.SSLCOMMERZ_STORE_ID,
@@ -38,10 +40,11 @@ const initPayment = async (req, res) => {
 
         //! Set the urls
         payment.setUrls({
-            success: "http://localhost:3001/api/payment/success",
+            success:
+                "https://bohubrihi-burger-builder-backend-app.onrender.com/payment/success",
             fail: "yoursite.com/fail",
             cancel: "yoursite.com/cancel",
-            ipn: "http://localhost:3001/api/payment/ipn",
+            ipn: "https://bohubrihi-burger-builder-backend-app.onrender.com/payment/ipn",
         });
 
         //! Set order details
@@ -107,7 +110,7 @@ const initPayment = async (req, res) => {
 };
 
 router.route("/").get(authorize, initPayment);
-// router.route("/ipn").post(ipn);
+router.route("/ipn").post(ipn);
 // router.route("/success").post(paymentSuccess);
 
 module.exports = router;
