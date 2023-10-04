@@ -20,13 +20,12 @@ const ipn = async (req, res) => {
 const initPayment = async (req, res) => {
     try {
         const userId = req.user._id;
+        const price = req.query.price;
         const profile = await Profile.findOne({ user: userId });
         const { address1, address2, city, state, postcode, country, phone } =
             profile;
-        const orderedProduct = await Orders.find({ user: userId });
-        console.log("This is orderedProduct=> ", orderedProduct);
 
-        const total_amount = orderedProduct.price;
+        const total_amount = price;
         console.log("This is total amount=>", total_amount);
 
         const total_item = 1;
