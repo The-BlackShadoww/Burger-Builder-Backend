@@ -24,9 +24,10 @@ const initPayment = async (req, res) => {
         const { address1, address2, city, state, postcode, country, phone } =
             profile;
         const orderedProduct = await Orders.find({ user: userId });
-        console.log(orderedProduct);
+        console.log("This is orderedProduct=> ", orderedProduct);
 
-        const total_amount = 0;
+        const total_amount = orderedProduct.price;
+        console.log("This is total amount=>", total_amount);
 
         const total_item = 1;
 
