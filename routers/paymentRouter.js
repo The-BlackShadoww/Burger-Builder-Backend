@@ -46,10 +46,10 @@ const initPayment = async (req, res) => {
         //! Set the urls
         payment.setUrls({
             success:
-                "https://bohubrihi-burger-builder-backend-app.onrender.com/payment/success",
+                "https://bohubrihi-burger-builder-backend-app.onrender.com/api/payment/success",
             fail: "yoursite.com/fail",
             cancel: "yoursite.com/cancel",
-            ipn: "https://bohubrihi-burger-builder-backend-app.onrender.com/payment/ipn",
+            ipn: "https://bohubrihi-burger-builder-backend-app.onrender.com/api/payment/ipn",
         });
 
         //! Set order details
