@@ -4,6 +4,8 @@ dotenv.config();
 const mongoose = require('mongoose');
 const app = require('./app');
 
+global.__basedir = __dirname;
+
 const DB_URI = process.env.MONGODB_SERVER.replace('<password>', process.env.DB_ATLAS_PASSWORD);
 
 //! Connect MongoDB

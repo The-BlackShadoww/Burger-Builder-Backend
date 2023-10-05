@@ -19,11 +19,10 @@ const ipn = async (req, res) => {
 
 const initPayment = async (req, res) => {
     try {
-        const user = req.user;
-        console.log("This is the user => ", user);
         const userId = req.user._id;
         const price = req.query.price;
-        console.log("this is the price => ", price);
+        const cusOrder = req.query.order;
+        console.log("This is order=>", cusOrder);
         const profile = await Profile.findOne({ user: userId });
         const { address1, address2, city, state, postcode, country, phone } =
             profile;
@@ -97,17 +96,12 @@ const initPayment = async (req, res) => {
 
         response = await payment.paymentInit();
 
-        // let order = new Order({
-        //     cartItems: cartItems,
-        //     user: userId,
-        //     transaction_id: tran_id,
-        //     address: profile,
-        // });
+        let order = new Orders(cusOrder);
 
-        // if (response.status === "SUCCESS") {
-        //     order.sessionKey = response["sessionkey"];
-        //     await order.save();
-        // }
+        if (response.status === "SUCCESS") {
+            order.sessionKey = response["sessionkey"];
+            await order.save();
+        }
 
         return res.status(200).send(response);
     } catch (err) {
@@ -115,8 +109,12 @@ const initPayment = async (req, res) => {
     }
 };
 
+const paymentSuccess = async (req, res) => {
+    res.sendFile(path.join(__basedir + "/public/success.html"));
+};
+
 router.route("/").get(authorize, initPayment);
 router.route("/ipn").post(ipn);
-// router.route("/success").post(paymentSuccess);
+router.route("/success").post(paymentSuccess);
 
 module.exports = router;
