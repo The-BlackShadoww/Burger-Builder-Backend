@@ -21,10 +21,9 @@ const newOrder = async (req, res) => {
 const orderList = async (req, res) => {
     //! To get req.user._id you must call the authorize function first. Otherwise you won't get the user object which is send from authorization.js
     const orders = await Orders.find({ userId: req.user._id })
-        .select("orderStatus")
-        .sort({
-            orderTime: -1,
-        });
+    .sort({
+        orderTime: -1,
+    });
     res.send(orders);
 };
 
