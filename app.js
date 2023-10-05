@@ -11,7 +11,7 @@ const app = express();
 
 app.use(compression());
 app.use(cors());
-app.use(express.json()); // when we submit something in post method this express.json function will automatically convert that data into json format. Without this function post request will not work.
+app.use(express.json()); //* when we submit something in post method this express.json function will automatically convert that data into json format. Without this function post request will not work.
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/user", userRouter);

@@ -12,6 +12,7 @@ const orderSchema = Schema({
         country: String,
         phone: String,
         paymentType: String,
+        orderStatus: String,
     },
     price: Number,
     orderTime: { type: Date, default: Date.now },
