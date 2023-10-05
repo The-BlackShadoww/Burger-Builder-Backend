@@ -21,7 +21,7 @@ const initPayment = async (req, res) => {
     try {
         const userId = req.user._id;
         const price = req.query.price;
-        const cusOrder = req.query.order;
+        const cusOrder = JSON.parse(req.query.order);
         console.log("This is order=>", cusOrder);
         const profile = await Profile.findOne({ user: userId });
         const { address1, address2, city, state, postcode, country, phone } =
