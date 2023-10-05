@@ -20,7 +20,7 @@ const ipn = async (req, res) => {
 const initPayment = async (req, res) => {
     try {
         const user = req.user;
-        console.log("This is the user = ", user);
+        console.log("This is the user => ", user);
         const userId = req.user._id;
         const price = req.query.price;
         console.log("this is the price => ", price);
