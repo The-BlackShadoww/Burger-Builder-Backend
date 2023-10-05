@@ -10,7 +10,9 @@ const fetch = require("node-fetch");
 const authorize = require("../middleware/authorize");
 
 const ipn = async (req, res) => {
+    console.log("This is req body =>", req.body);
     const payment = new Payment(req.body);
+    console.log("This is payment=>", payment);
 
     await payment.save();
 
