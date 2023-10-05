@@ -26,7 +26,7 @@ const userSchema = Schema({
 userSchema.methods.genJWT = function () {
     //! This will also be send as request payload.
     const token = jwt.sign(
-        { _id: this._id, email: this.email },
+        { _id: this._id, email: this.email, name: this.name },
         process.env.JWT_SECRET_KEY,
         { expiresIn: "3h" }
     );
