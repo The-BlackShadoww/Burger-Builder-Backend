@@ -14,7 +14,6 @@ const orderSchema = Schema({
         paymentType: String,
     },
     price: Number,
-    orderStatus: { type: String, default: "DefaultValue", select: true },
     orderTime: { type: Date, default: Date.now },
 });
 
